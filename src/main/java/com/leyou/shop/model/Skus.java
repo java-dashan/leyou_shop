@@ -9,7 +9,7 @@ import java.util.Date;
 
 @Data
 @Table(name = "tb_sku")
-public class Skus {
+public class Skus {   //库存单元     spu标准化产品单元
 
     @Column(name = "id")
     @Id
