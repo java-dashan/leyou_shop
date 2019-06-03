@@ -15,5 +15,7 @@ public class Category {
 
     private Boolean is_parent;
 
+    private String name;
+
     private Integer sort;   //排序指数
 }

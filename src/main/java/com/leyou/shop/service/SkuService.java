@@ -10,13 +10,13 @@ import java.util.List;
 
 @Service
 @Transactional
-public class SkusService {
+public class SkuService {
 
     @Autowired
     private SkusDao skusDao;
 
-    public List<Skus> skusList(){
-        return skusDao.selectAll();
+    public List<Skus> skusListByspuId(Skus skus){
+        return skusDao.select(skus);
     }
 
     public Skus query(Skus skus){
