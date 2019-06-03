@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/spu")
-@Api
+@Api(value = "spu Api")
 public class SpuController {
 
     @Autowired

@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/category")
-@Api
+@Api(value = "类目category Api")
 public class CategoryController {
 
 

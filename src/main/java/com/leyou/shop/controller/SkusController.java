@@ -17,7 +17,7 @@ public class SkusController {
     @Autowired
     private SkusService skusService;
 
-    @ApiOperation(value = "查询所有skus")
+    @ApiOperation(value = "查询所有sku")
     @GetMapping
     public List<Skus>  list(){
         return skusService.skusList();
