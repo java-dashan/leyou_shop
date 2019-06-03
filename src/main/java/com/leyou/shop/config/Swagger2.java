@@ -11,7 +11,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
-@EnableSwagger2   //http://localhost:10000/swagger-ui.html  接口管理页面
+@EnableSwagger2   //http://localhost:9999/swagger-ui.html  接口管理页面
 public class Swagger2 {
     @Bean
     public Docket createRestApi() {
