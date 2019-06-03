@@ -6,7 +6,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 //@Configuration
-//@EnableWebMvc
+//@EnableWebMvc   //如使用该方法跨域会使swaggerui失效
 public class CorsConfig implements WebMvcConfigurer {
 
   @Override
