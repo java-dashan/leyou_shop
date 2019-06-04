@@ -22,4 +22,8 @@ public class User {
     private String password;
 
     private Date created;
+
+    private String u_name;
+
+    private String introduction;
 }

@@ -4,6 +4,7 @@ import com.leyou.shop.controller.req.UserReq;
 import com.leyou.shop.model.User;
 import com.leyou.shop.service.UserService;
 import com.leyou.shop.util.IdWorker;
+import com.leyou.shop.util.PageResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Api(value = "user API")
 @RestController
@@ -24,7 +26,7 @@ public class UserController {
     @Autowired
     private IdWorker idWorker;
 
-    @ApiOperation(value = "查询user")
+    @ApiOperation(value = "登陆user")
     @PostMapping("/login")
     public ResponseEntity<User> query(@RequestBody UserReq userReq) {
 //        System.out.println(isremeber);
@@ -37,11 +39,21 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
+    @ApiOperation(value = "查询所有user")
+    @GetMapping
+    public ResponseEntity<PageResult<User>> list(@RequestParam("pageNum") int pageNum, @RequestParam("pageSize") int pageSize) {
+        return ResponseEntity.ok(userService.list(pageNum, pageSize));
+    }
+
+    @ApiOperation(value = "通过名字查询")
+    @GetMapping("/name")
+    public ResponseEntity<PageResult<User>> listByName(@RequestParam("pageNum") int pageNum, @RequestParam("pageSize") int pageSize, @RequestParam("name") String name) {
+        return ResponseEntity.ok(userService.listByName(pageNum, pageSize ,name));
+    }
+
     @ApiOperation(value = "新增用户")
     @PostMapping
     public ResponseEntity<Void> insert(@RequestBody User user) {
-        long l = idWorker.nextId();
-        user.setId(l);
         user.setCreated(new Date());
         userService.save(user);
         return ResponseEntity.ok(null);
@@ -55,12 +67,13 @@ public class UserController {
     }
 
     @ApiOperation(value = "删除用户")
-    @DeleteMapping
-    public ResponseEntity<Void> delete(@RequestBody User user) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id ) {
+        User user = new User();
+        user.setId(id);
         userService.delete(user);
         return ResponseEntity.ok(null);
     }
-
 
 
 }
