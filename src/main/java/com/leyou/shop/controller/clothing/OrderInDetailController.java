@@ -3,6 +3,7 @@ package com.leyou.shop.controller.clothing;
 import com.leyou.shop.model.clothing.OrderInDetail;
 import com.leyou.shop.service.clothing.OrderInDetailService;
 import com.leyou.shop.util.PageResult;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,10 +32,18 @@ public class OrderInDetailController {
             @PathVariable("pageSize") int pageSize
     ){
         OrderInDetail orderInDetail = new OrderInDetail();
-        orderInDetail.setOrder_no(order_no);
-        orderInDetail.setCode(code);
-        orderInDetail.setColor(color);
-        orderInDetail.setSize(size);
+        if (StringUtils.isNotEmpty(order_no)) {
+            orderInDetail.setOrder_no(order_no);
+        }
+        if (StringUtils.isNotEmpty(code)) {
+            orderInDetail.setCode(code);
+        }
+        if (StringUtils.isNotEmpty(color)) {
+            orderInDetail.setColor(color);
+        }
+        if (StringUtils.isNotEmpty(size)) {
+            orderInDetail.setSize(size);
+        }
         return ResponseEntity.ok(orderInDetailService.listByCondition(orderInDetail,pageNum,pageSize));
     }
 

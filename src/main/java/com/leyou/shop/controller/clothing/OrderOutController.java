@@ -3,6 +3,7 @@ package com.leyou.shop.controller.clothing;
 import com.leyou.shop.model.clothing.OrderOut;
 import com.leyou.shop.service.clothing.OrderOutService;
 import com.leyou.shop.util.PageResult;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,8 +27,8 @@ public class OrderOutController {
     @GetMapping("/listByCondition/{pageNum}/{pageSize}")
     public ResponseEntity<PageResult<OrderOut>> listByCondition(
             @RequestParam(name="order_no",required = false) String order_no,
-            @RequestParam(name = "start_date", required = false) Date start_date,
-            @RequestParam(name = "end_date", required = false) Date end_date,
+//            @RequestParam(name = "start_date", required = false) Date start_date,
+//            @RequestParam(name = "end_date", required = false) Date end_date,
             @RequestParam(name = "person", required = false) String person,
             @RequestParam(name = "tel", required = false) String tel,
             @RequestParam(name = "rperson", required = false) String rperson,
@@ -39,15 +40,14 @@ public class OrderOutController {
             @PathVariable("pageSize") int pageSize
     ){
         OrderOut orderOut = new OrderOut();
-        orderOut.setOrder_no(order_no);
-        orderOut.setOrder_no(order_no);
-        orderOut.setAddress(address);
+        if (StringUtils.isNotEmpty(order_no)){orderOut.setOrder_no(order_no);}
+        if (StringUtils.isNotEmpty(person)){orderOut.setPerson(person);}
+        if (StringUtils.isNotEmpty(remark)){orderOut.setRemark(remark);}
+        if(StringUtils.isNotEmpty(address)){orderOut.setAddress(address);}
+        if(StringUtils.isNotEmpty(tel)){orderOut.setTel(tel);}
+        if(StringUtils.isNotEmpty(rperson)){ orderOut.setRperson(rperson);}
         orderOut.setFlag(flag);
-        orderOut.setPerson(person);
         orderOut.setWarehouse(warehouse);
-        orderOut.setRemark(remark);
-        orderOut.setTel(tel);
-        orderOut.setRperson(rperson);
         return ResponseEntity.ok(orderOutService.listByCondition(orderOut,pageNum,pageSize));
     }
 

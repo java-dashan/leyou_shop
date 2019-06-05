@@ -7,10 +7,6 @@ import com.leyou.shop.model.clothing.Clothing;
 import com.leyou.shop.util.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import tk.mybatis.mapper.entity.Example;
-
-import java.util.List;
 
 @Service
 public class ClothingService {
@@ -40,6 +36,6 @@ public class ClothingService {
     }
 
     public void delete(Clothing clothing) {
-        clothingDao.deleteByPrimaryKey(clothing);
+        clothingDao.delete(clothing);
     }
 }

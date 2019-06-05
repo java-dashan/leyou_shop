@@ -34,7 +34,7 @@ public class CategoryController {
     @ApiOperation(value = "查询一级目录")
     public ResponseEntity<List<Category>> listFirst(){
         Category category = new Category();
-        category.setIs_parent(true);
+        category.setParent_id(Long.getLong("0"));
         return ResponseEntity.ok(categoryService.list(category));
     }
 
