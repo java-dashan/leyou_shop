@@ -2,11 +2,34 @@ server:
   port: 9999
 spring:
   application:
-    name: leyou-shop
+    name: shop
+#    mysql配置
   datasource:
     url: jdbc:mysql://localhost:3306/shop?serverTimezone=UTC
     username: root
     password: dashan
     driver-class-name: com.mysql.jdbc.Driver
+#    redis配置
+  redis:
+    host: 47.107.176.105
+    port: 6379
+#    database: 0
+#    timeout: 0
+#    password:
+#    pool:
+#    cluster:
+#      max-redirects:  10
+#      nodes:
+
+  #    mongodb配置
+  data:
+    mongodb:
+     host: 47.107.176.105
+     port: 27017
+     database: shop
+
+#logging:
+#  level:
+#    com.leyou.shop.dao: debug
 #mybatis:
 #  type-handlers-package: com.leyou.shop.dao

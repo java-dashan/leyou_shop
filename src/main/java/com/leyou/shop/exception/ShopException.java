@@ -1,5 +1,6 @@
 package com.leyou.shop.exception;
 
+import com.leyou.shop.util.ShopExceptionEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class ShopException extends  RuntimeException{
-    private int code;
+    private int status;
     private String msg;
+
+    public ShopException(ShopExceptionEnum exceptionEnum) {
+        this.status=exceptionEnum.getStatus();
+        this.msg = exceptionEnum.getMsg();
+    }
 }

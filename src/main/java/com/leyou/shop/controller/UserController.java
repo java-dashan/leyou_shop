@@ -54,12 +54,13 @@ public class UserController {
     @ApiOperation(value = "新增用户")
     @PostMapping
     public ResponseEntity<Void> insert(@RequestBody User user) {
+        user.setId(idWorker.nextId());
         user.setCreated(new Date());
         userService.save(user);
         return ResponseEntity.ok(null);
     }
 
-    @ApiOperation(value = "添加用户")
+    @ApiOperation(value = "更新用户")
     @PutMapping
     public ResponseEntity<Void> update(@RequestBody User user) {
         userService.update(user);

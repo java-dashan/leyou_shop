@@ -15,10 +15,11 @@ public class ClothingService {
     private ClothingDao clothingDao;
 
     public PageResult<Clothing> list(int pageNum, int pageSize) {
-        PageHelper.startPage(pageNum, pageSize);
+        PageHelper.startPage(pageNum, pageSize); //分页
         Page<Clothing> page = (Page<Clothing>) clothingDao.selectAll();
         return new PageResult<>(page.getTotal(), page.getPages(), page.getResult());
     }
+
 
     public PageResult<Clothing> listByCondition(Clothing clothing, int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);

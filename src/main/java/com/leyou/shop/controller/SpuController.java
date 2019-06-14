@@ -19,25 +19,56 @@ public class SpuController {
     @Autowired
     private SpuService spuService;
 
-    @GetMapping("/{parentid}")
+    @GetMapping("/{parentid}/{pageNum}/{pageSize}")
     @ApiOperation(value = "查询cid为xxx的spu列表")
-    public ResponseEntity<PageResult<Spu>> queryByParentId(@PathVariable("parentid") Long parentid,@RequestParam("pageNum") int pageNum, @RequestParam("pageSize")int pageSize){
-        return ResponseEntity.ok(spuService.queryByParentId(parentid, pageNum,pageSize));
+    public ResponseEntity<PageResult<Spu>> queryByParentId(@PathVariable("parentid") Long parentid, @PathVariable("pageNum") int pageNum, @PathVariable("pageSize") int pageSize) {
+        return ResponseEntity.ok(spuService.queryByParentId(parentid, pageNum, pageSize));
     }
 
-    @GetMapping
+    @GetMapping("/{pageNum}/{pageSize}")
     @ApiOperation(value = "查询spu列表")
-    public ResponseEntity<PageResult<Spu>> list(@RequestParam("pageNum") int pageNum, @RequestParam("pageSize")int pageSize){
-        return ResponseEntity.ok(spuService.list(null, pageNum,pageSize));
+    public ResponseEntity<PageResult<Spu>> list(@PathVariable("pageNum") int pageNum, @PathVariable("pageSize") int pageSize) {
+        return ResponseEntity.ok(spuService.list(null, pageNum, pageSize));
     }
 
-    @GetMapping("/page")
-    @ApiOperation(value = "模糊查询")
-    public ResponseEntity<PageResult> listLike(@RequestParam("name") String name, @RequestParam("pageNum") int pageNum, @RequestParam("pageSize")int pageSize){
-        return ResponseEntity.ok(spuService.listLike(name,pageNum,pageSize));
+    @GetMapping("/like/{pageNum}/{pageSize}")
+    @ApiOperation(value = "根据标题模糊查询")
+    public ResponseEntity<PageResult> listLike(@RequestParam("name") String name, @PathVariable("pageNum") int pageNum, @PathVariable("pageSize") int pageSize) {
+        return ResponseEntity.ok(spuService.listLikeByTitle(name, pageNum, pageSize));
     }
 
+    @GetMapping("/likebybrand/{pageNum}/{pageSize}")
+    @ApiOperation(value = "根据品牌模糊查询")
+    public ResponseEntity<PageResult> likeByBrand(@RequestParam("brandName") String name, @PathVariable("pageNum") int pageNum, @PathVariable("pageSize") int pageSize) {
+        return ResponseEntity.ok(spuService.queryByBrandName(name, pageNum, pageSize));
+    }
 
+    @GetMapping("/createtime/{pageNum}/{pageSize}")
+    @ApiOperation(value = "根据品牌模糊查询")
+    public ResponseEntity<PageResult> listByCreateTime(@PathVariable("pageNum") int pageNum, @PathVariable("pageSize") int pageSize) {
+        return ResponseEntity.ok(spuService.queryByCreateTime(pageNum, pageSize));
+    }
+
+    @PostMapping
+    @ApiOperation(value = "增加spu")
+    public ResponseEntity<Void> insert(@RequestBody Spu spu) {
+        spuService.insert(spu);
+        return ResponseEntity.ok(null);
+    }
+
+    @PutMapping
+    @ApiOperation(value = "更改spu")
+    public ResponseEntity<Void> update(@RequestBody Spu spu) {
+        spuService.update(spu);
+        return ResponseEntity.ok(null);
+    }
+
+    @DeleteMapping("/{id}")
+    @ApiOperation(value = "删除spu")
+    public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
+        spuService.delete(id);
+        return ResponseEntity.ok(null);
+    }
 
 
 }

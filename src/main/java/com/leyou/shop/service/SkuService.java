@@ -24,5 +24,15 @@ public class SkuService {
     }
 
 
+    public void insert(Skus sku) {
+        skusDao.insertSelective(sku);
+    }
 
+    public void delete(Long id) {
+        skusDao.deleteByPrimaryKey(id);
+    }
+
+    public void update(Skus sku) {
+        skusDao.updateByPrimaryKeySelective(sku);
+    }
 }

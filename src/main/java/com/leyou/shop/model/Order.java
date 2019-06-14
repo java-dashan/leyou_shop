@@ -1,5 +1,7 @@
 package com.leyou.shop.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.leyou.shop.util.JsonLongSerializer;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,6 +14,7 @@ import java.util.Date;
 @Table(name = "tb_order")
 public class Order {
     @Id
+    @JsonSerialize(using = JsonLongSerializer.class)
     private Long order_id;
     private Long total_pay;
     private Long actual_pay;
@@ -21,6 +24,7 @@ public class Order {
     private Date create_time;
     private String shipping_name;
     private String shipping_code;
+    @JsonSerialize(using = JsonLongSerializer.class)
     private String user_id;
     private String buyer_message;
     private String buyer_nick;

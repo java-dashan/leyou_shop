@@ -13,7 +13,7 @@ public class ExceptionIntercept {
     @ResponseBody
     @ExceptionHandler(value = ShopException.class)
     public ResponseEntity<ShopException> errorHandler(ShopException ex) {
-        return ResponseEntity.status(ex.getCode()).body(ex);
+        return ResponseEntity.status(ex.getStatus()).body(ex);
     }
 
 }

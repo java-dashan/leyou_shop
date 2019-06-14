@@ -32,7 +32,9 @@ public class UserService {
     }
 
     public void update(User user){
+        System.out.println(user);
         userDao.updateByPrimaryKeySelective(user);
+        System.out.println(user);
     }
 
     public void delete(User user){
@@ -49,7 +51,7 @@ public class UserService {
         User user = new User();
         user.setU_name(name);
         PageHelper.startPage(pageNum, pageSize);
-        Page<User> pageInfo = (Page<User>) userDao.select(user);
+        Page<User> pageInfo = (Page<User>) userDao.listByname("%"+user.getU_name()+"%");
         return new PageResult<>(pageInfo.getTotal(), pageInfo.getPages(), pageInfo.getResult());
     }
 }

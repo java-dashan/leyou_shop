@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
-@RestController   //返回json字符串
+@RestController   //返回json字符串  http:127.0.0.1:80/clothing/1/2  get
 @RequestMapping("/clothing")
 public class ClothingController {
     @Autowired
